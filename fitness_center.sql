@@ -1,9 +1,9 @@
 CREATE TABLE medlemmer (
     id INTEGER PRIMARY KEY,
-    name TEXT,
-    email TEXT,
-    age INTEGER,
-    city TEXT
+    name NVARCHAR(128),
+    email NVARCHAR(128),
+    age INT,
+    city NVARCHAR(128)
 );
 
 INSERT INTO medlemmer (id, name, email, age, city) VALUES
@@ -15,9 +15,9 @@ INSERT INTO medlemmer (id, name, email, age, city) VALUES
 
 CREATE TABLE treningsokter (
     id INTEGER PRIMARY KEY,
-    name TEXT,
-    category TEXT,
-    duration INTEGER
+    name NVARCHAR(128),
+    category NVARCHAR(128),
+    duration INT
 );
 
 INSERT INTO treningsokter (id, name, category, duration) VALUES
@@ -29,9 +29,9 @@ INSERT INTO treningsokter (id, name, category, duration) VALUES
 
 CREATE TABLE medlemskap (
     id INTEGER PRIMARY KEY,
-    member_id INTEGER,
-    start_date DATE,
-    status TEXT,
+    member_id INT,
+    start_date DATETIME2 ,
+    status NVARCHAR(128),
     FOREIGN KEY (member_id) REFERENCES medlemmer(id)
 );
 
@@ -43,11 +43,11 @@ INSERT INTO medlemskap (id, member_id, start_date, status) VALUES
 (5, 5, '2024-05-01', 'Aktiv');
 
 CREATE TABLE besok (
-    visit_id INTEGER PRIMARY KEY,
-    member_id INTEGER,
-    session_id INTEGER,
-    visit_date DATE,
-    duration INTEGER,
+    visit_id INT PRIMARY KEY,
+    member_id INT,
+    session_id INT,
+    visit_date DATETIME2,
+    duration INT,
     FOREIGN KEY (member_id) REFERENCES medlemmer(id),
     FOREIGN KEY (session_id) REFERENCES treningsokter(id)
 );
@@ -63,11 +63,11 @@ INSERT INTO besok (visit_id, member_id, session_id, visit_date, duration) VALUES
 (8, 3, 3, '2024-05-18', 75);
 
 CREATE TABLE feedback (
-    feedback_id INTEGER PRIMARY KEY,
-    member_id INTEGER,
-    session_id INTEGER,
-    rating INTEGER,
-    comments TEXT,
+    feedback_id INT PRIMARY KEY,
+    member_id INT,
+    session_id INT,
+    rating INT,
+    comments NVARCHAR(128),
     FOREIGN KEY (member_id) REFERENCES medlemmer(id),
     FOREIGN KEY (session_id) REFERENCES treningsokter(id)
 );
